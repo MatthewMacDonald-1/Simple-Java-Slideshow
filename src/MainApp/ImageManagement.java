@@ -29,13 +29,23 @@ public class ImageManagement {
      * <p>The default number of images for the program to keep in memory.</p>
      * <p>Prev, current, next</p>
      */
-    private final int DEFAULT_NUM_IMAGES = 3;
-    private boolean isUsingDefault = false;
-    private int numImages = 0;
+    private static final int DEFAULT_NUM_IMAGES = 3;
+    private final int maxCacheSize;
 
+    /**
+     * Initialize using defaults
+     */
     public ImageManagement() {
-        cachedImages = new BufferedImage[DEFAULT_NUM_IMAGES];
-        isUsingDefault = true;
+        this(DEFAULT_NUM_IMAGES);
+    }
+
+    /**
+     * Initialize with a custom image cache size.
+     */
+    public ImageManagement(int cachedImagesSize) {
+        if (cachedImagesSize < 2) throw new RuntimeException("Image cache size is less then minimum of 2!");
+        cachedImages = new BufferedImage[cachedImagesSize];
+        maxCacheSize = cachedImagesSize;
     }
 
     public boolean hasImage() {
@@ -56,10 +66,10 @@ public class ImageManagement {
     public boolean setImageFiles(File[] imageFiles) {
         if (imageFiles.length >= 1) {
             this.imageFiles = imageFiles;
-            if (imageFiles.length < DEFAULT_NUM_IMAGES) {
+            if (imageFiles.length < maxCacheSize) {
                 cachedImages = new BufferedImage[imageFiles.length];
             } else {
-                cachedImages = new BufferedImage[DEFAULT_NUM_IMAGES];
+                cachedImages = new BufferedImage[maxCacheSize];
             }
             prepFromStart();
             return true;
@@ -86,8 +96,8 @@ public class ImageManagement {
         if (currentCachedImageIndex >= cachedImages.length) currentCachedImageIndex = 0;
 
         // load image 2 places ahead
-        int loadToIndex = (currentCachedImageIndex + 2 >= cachedImages.length ? currentCachedImageIndex + 2 - cachedImages.length : currentCachedImageIndex + 2);
-        int loadFromImageFilesIndex = (currentActiveImageIndex + 2 >= imageFiles.length ? currentActiveImageIndex + 2 - imageFiles.length : currentActiveImageIndex + 2);
+        int loadToIndex = (currentCachedImageIndex + (cachedImages.length - 1) >= cachedImages.length ? currentCachedImageIndex + (cachedImages.length - 1) - cachedImages.length : currentCachedImageIndex + (cachedImages.length - 1));
+        int loadFromImageFilesIndex = (currentActiveImageIndex + (cachedImages.length - 1) >= imageFiles.length ? currentActiveImageIndex + (cachedImages.length - 1) - imageFiles.length : currentActiveImageIndex + (cachedImages.length - 1));
 
         try {
             cachedImages[loadToIndex] = ImageIO.read(imageFiles[loadFromImageFilesIndex]);

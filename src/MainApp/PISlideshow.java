@@ -14,10 +14,15 @@ import javax.imageio.ImageIO;
 
 public class PISlideshow {
 
+    // From args
+    /** Is unset if equal to -1 */
+    private static int customCacheSize = -1;
+
+    // 
     static private JFrame fullscreenWidnow = null;
     static private JFrame mainFrame = null;
     static private GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices()[0];
-    static private ImageManagement imageManagement = new ImageManagement();
+    static private ImageManagement imageManagement;
     static final private Dimension DEFAULT_MIN_WINDOW_SIZE = new Dimension(800, 500);
 
     // Main Panels
@@ -32,6 +37,8 @@ public class PISlideshow {
         // Window Icon
         // Image image = ImageIO.read(PISlideshow.class.getClassLoader().getResource("icon.png"));
         // mainStartWindow.setIconImage(image);
+
+        imageManagement = customCacheSize != -1 ? new ImageManagement(customCacheSize) : new ImageManagement();
 
         settingsPanel = new SettingsPanel(imageManagement);
 
@@ -71,6 +78,17 @@ public class PISlideshow {
     }
 
     public static void main(String[] args) throws Exception {
+
+        if (args.length >= 1) {
+            try {
+                customCacheSize = Integer.parseInt(args[0]);
+                System.out.println("Custom cache size set to: " + customCacheSize);
+            } catch (NumberFormatException e) {
+                // continue without custom cache size
+                System.out.println("Invalid custom cache size. Continuing using defaults.");
+            }
+            
+        }
         
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
