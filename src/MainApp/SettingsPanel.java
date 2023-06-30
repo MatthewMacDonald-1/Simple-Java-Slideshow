@@ -3,11 +3,14 @@ package MainApp;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FilenameFilter;
+import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SpinnerNumberModel;
+import javax.swing.filechooser.FileFilter;
 
 public class SettingsPanel extends JPanel {
     
@@ -18,8 +21,8 @@ public class SettingsPanel extends JPanel {
 
     JPanel panel = this;
 
-    private boolean hasChosenFilesAndFolder = false;
     private int timeDisplayMS = 2000;
+    private boolean hasChosenFilesAndFolder = false;
     private File[] imageFilesFromChosenDirectory = null;
 
     public SettingsPanel(ImageManagement imageManagement) {
@@ -247,20 +250,79 @@ public class SettingsPanel extends JPanel {
         }
 
         // TODO create an array of all the image file paths in the selected directory and its subfolders.
+        File selectedDirectory = chooser.getSelectedFile();
+        if (!(selectedDirectory.exists() && selectedDirectory.isDirectory())) {
+            JOptionPane.showMessageDialog(null, "Please select a genuine folder", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
+            return; // Directory not valid
+        }
 
+        File[] filesInFolder = selectedDirectory.listFiles();
+
+        ArrayList<File> foundImages = new ArrayList<File>();
+
+        findImageFiles(filesInFolder, 0, foundImages);
+
+        File[] imageFiles = new File[foundImages.size()];
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < imageFiles.length; i++) {
+            imageFiles[i] = foundImages.get(i);
+            sb.append(imageFiles[i].toString());
+            if (i != imageFiles.length - 1) sb.append('\n');
+        }
+        imageFilesTextArea2.setText(sb.toString());
 
         // Then set variables for passing on start if there is at least on image present
+        imageFilesFromChosenDirectory = imageFiles;
+        hasChosenFilesAndFolder = true;
+    }
 
-        // Put this list in text form into the textarea for the GUI
+    static final FilenameFilter imageFileFilter = new FilenameFilter() {
+        public boolean accept(File dir, String name) {
+            String lowercaseName = name.toLowerCase();
+            if (lowercaseName.endsWith(".png") || lowercaseName.endsWith(".jpg") || lowercaseName.endsWith(".jpeg") || lowercaseName.endsWith(".gif") || lowercaseName.endsWith(".BMP") || lowercaseName.endsWith(".WBMP")) {
+               return true;
+            } else {
+               return false;
+            }
+         }
+    }; 
+    
+    /**
+     * <p>Uses <code>imageFileFilter</code> as a filter for supported image formats.</p>
+     * @param a
+     * @param i
+     * @param lvl
+     * @param output
+     * 
+     * @see imageFileFilter
+     */
+    private void findImageFiles(File[] a, int i, ArrayList<File> output) {
+        if (i == a.length) { // base case for recursion
+            return;
+        }
 
+        if (a[i].isFile()) {
+            if (imageFileFilter.accept(a[i], a[i].getName())) {
+                output.add(a[i]); // add to output
+            }
+        } else if (a[i].isDirectory()) {
+            findImageFiles(a[i].listFiles(), 0, output);
+        }
 
-    }                                                          
+        findImageFiles(a, i + 1, output);
+    }
 
     private void startSlideshowButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         // TODO add your handling code here:
         if (hasChosenFilesAndFolder) {
-            imageManagement.setTimeDisplayMS(timeDisplayMS);
-            imageManagement.setImageFiles(imageFilesFromChosenDirectory);
+            if (timeDisplayMS >= 500 && timeDisplayMS <= 10000) {
+                imageManagement.setTimeDisplayMS(timeDisplayMS);
+                if (!imageManagement.setImageFiles(imageFilesFromChosenDirectory)) JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
+                imageManagement.startSlideshow();
+                PISlideshow.switchToImagePanel();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please input a valid range for Image Display time. Accepted range is 500 to 10,000 milliseconds.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
+            }            
         } else {
             JOptionPane.showMessageDialog(null, "Please select a folder with images or subfolder containing images.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
         }
