@@ -244,30 +244,4 @@ public class SettingsPanel extends JPanel {
         // TODO add your handling code here:
     }   
 
-    class FolderChooser implements ActionListener {
-
-        String choosertitle = "Select image folder";
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            int result;
-                
-            chooser = new JFileChooser(); 
-            chooser.setCurrentDirectory(new java.io.File("."));
-            chooser.setDialogTitle(choosertitle);
-            chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-            //
-            // disable the "All files" option.
-            //
-            chooser.setAcceptAllFileFilterUsed(false);
-            //    
-            if (chooser.showOpenDialog(panel) == JFileChooser.APPROVE_OPTION) { 
-                System.out.println("getCurrentDirectory(): " +  chooser.getCurrentDirectory());
-                System.out.println("getSelectedFile() : " +  chooser.getSelectedFile());
-            } else {
-                System.out.println("No Selection ");
-            }
-        }
-
-    }
 }
