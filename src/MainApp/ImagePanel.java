@@ -20,7 +20,7 @@ public class ImagePanel extends JPanel {
         noImage = ImageIO.read(ImagePanel.class.getClassLoader().getResource("no-image.png"));
         image = imageManagement;
 
-        //setBackground(Color.BLACK); // sets frame background to black
+        setBackground(Color.BLACK); // sets frame background to black
     }
 
     /**
