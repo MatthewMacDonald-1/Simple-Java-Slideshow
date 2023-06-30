@@ -3,6 +3,8 @@ package MainApp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.imageio.ImageIO;
 
@@ -37,8 +39,9 @@ public class ImageManagement {
     }
 
     public boolean hasImage() {
+        //System.out.println("Cached images: " + (cachedImages != null) + ", " + (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0));
         if (cachedImages != null) {
-            if (currentActiveImageIndex >= cachedImages.length || currentActiveImageIndex < 0) {
+            if (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0) {
                 if (cachedImages[currentActiveImageIndex] != null) {
                     return true;
                 }
@@ -100,6 +103,19 @@ public class ImageManagement {
 
     public int getTimeDisplayMS() {
         return timeDisplayMS;
+    }
+
+
+
+    public void startSlideshow() {
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                goToNextImage();
+                PISlideshow.imagePanel.repaint();
+            }
+        }, 0, timeDisplayMS);
     }
 
 }

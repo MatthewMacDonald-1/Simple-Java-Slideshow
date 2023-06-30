@@ -22,7 +22,7 @@ public class PISlideshow {
 
     // Main Panels
     static private SettingsPanel settingsPanel = null;
-    static private ImagePanel imagePanel = null;
+    static protected ImagePanel imagePanel = null;
 
     private static void createAndShowGUI() throws Exception { 
         mainFrame = new JFrame("Rasp PI Slideshow");
