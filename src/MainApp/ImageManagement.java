@@ -39,7 +39,6 @@ public class ImageManagement {
     }
 
     public boolean hasImage() {
-        //System.out.println("Cached images: " + (cachedImages != null) + ", " + (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0));
         if (cachedImages != null) {
             if (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0) {
                 if (cachedImages[currentCachedImageIndex] != null) {

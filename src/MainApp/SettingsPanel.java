@@ -243,10 +243,12 @@ public class SettingsPanel extends JPanel {
         chooser.setAcceptAllFileFilterUsed(false);
         //    
         if (chooser.showOpenDialog(panel) == JFileChooser.APPROVE_OPTION) { 
-            System.out.println("getCurrentDirectory(): " +  chooser.getCurrentDirectory());
-            System.out.println("getSelectedFile() : " +  chooser.getSelectedFile());
+            // System.out.println("getCurrentDirectory(): " +  chooser.getCurrentDirectory());
+            // System.out.println("getSelectedFile() : " +  chooser.getSelectedFile());
         } else {
-            System.out.println("No Selection ");
+            // System.out.println("No Selection ");
+            JOptionPane.showMessageDialog(null, "No folder selected.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
+            return;
         }
 
         // TODO create an array of all the image file paths in the selected directory and its subfolders.
@@ -313,7 +315,7 @@ public class SettingsPanel extends JPanel {
     }
 
     private void startSlideshowButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                                      
-        // TODO add your handling code here:
+        
         if (hasChosenFilesAndFolder) {
             if (timeDisplayMS >= 500 && timeDisplayMS <= 10000) {
                 imageManagement.setTimeDisplayMS(timeDisplayMS);
