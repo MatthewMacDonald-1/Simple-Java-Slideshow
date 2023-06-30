@@ -245,6 +245,15 @@ public class SettingsPanel extends JPanel {
         } else {
             System.out.println("No Selection ");
         }
+
+        // TODO create an array of all the image file paths in the selected directory and its subfolders.
+
+
+        // Then set variables for passing on start if there is at least on image present
+
+        // Put this list in text form into the textarea for the GUI
+
+
     }                                                          
 
     private void startSlideshowButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                                      
