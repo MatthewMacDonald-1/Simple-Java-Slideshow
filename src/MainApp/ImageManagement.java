@@ -42,7 +42,7 @@ public class ImageManagement {
         //System.out.println("Cached images: " + (cachedImages != null) + ", " + (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0));
         if (cachedImages != null) {
             if (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0) {
-                if (cachedImages[currentActiveImageIndex] != null) {
+                if (cachedImages[currentCachedImageIndex] != null) {
                     return true;
                 }
             }
@@ -51,7 +51,7 @@ public class ImageManagement {
     }
 
     public BufferedImage getCurrent() {
-        return cachedImages[currentActiveImageIndex];
+        return cachedImages[currentCachedImageIndex];
     }
 
     public boolean setImageFiles(File[] imageFiles) {
