@@ -16,6 +16,8 @@ public class ImageManagement {
     private int currentCachedImageIndex = -1;
     private File[] imageFiles = null;
 
+    private int timeDisplayMS = 2000;
+
     /**
      * Current images in memory
      */
@@ -90,6 +92,14 @@ public class ImageManagement {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setTimeDisplayMS(int timeDisplayMS) {
+        this.timeDisplayMS = timeDisplayMS;
+    }
+
+    public int getTimeDisplayMS() {
+        return timeDisplayMS;
     }
 
 }

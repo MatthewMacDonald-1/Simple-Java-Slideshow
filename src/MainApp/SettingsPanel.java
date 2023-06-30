@@ -2,25 +2,31 @@ package MainApp;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SpinnerNumberModel;
 
 public class SettingsPanel extends JPanel {
     
     private ImageManagement imageManagement = null;
 
     private JFileChooser chooser = null;
-
     private final String CHOOSER_TITLE = "Select image folder";
 
     JPanel panel = this;
+
+    private boolean hasChosenFilesAndFolder = false;
+    private int timeDisplayMS = 2000;
+    private File[] imageFilesFromChosenDirectory = null;
 
     public SettingsPanel(ImageManagement imageManagement) {
         this.imageManagement = imageManagement;
 
         PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
+
         initComponents();
     }
 
@@ -29,6 +35,7 @@ public class SettingsPanel extends JPanel {
     private java.awt.Label displayTimeLabel;
     private java.awt.Label displayTimeLabel1;
     private javax.swing.JSpinner displayTimeSpinner;
+    private SpinnerNumberModel displayTimeSpinner1Model = new SpinnerNumberModel(2000, 500, 10000, 100);
     private javax.swing.JSpinner displayTimeSpinner1;
     private java.awt.TextArea imageFilesTextArea;
     private java.awt.TextArea imageFilesTextArea1;
@@ -64,7 +71,7 @@ public class SettingsPanel extends JPanel {
         settingsHeaderLabel1 = new javax.swing.JLabel();
         chooseImageDirectoryButton1 = new javax.swing.JButton();
         displayTimeLabel1 = new java.awt.Label();
-        displayTimeSpinner1 = new javax.swing.JSpinner();
+        displayTimeSpinner1 = new javax.swing.JSpinner(displayTimeSpinner1Model);
         repeatToggleButton2 = new javax.swing.JToggleButton();
         startSlideshowButton1 = new javax.swing.JButton();
         imageFilesTextArea2 = new java.awt.TextArea();
@@ -93,7 +100,7 @@ public class SettingsPanel extends JPanel {
             }
         });
 
-        repeatToggleButton.setText("Repeat Infinitly");
+        repeatToggleButton.setText("Repeat Infinitely");
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
         jFrame1.getContentPane().setLayout(jFrame1Layout);
@@ -139,7 +146,7 @@ public class SettingsPanel extends JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        repeatToggleButton1.setText("Repeat Infinitly");
+        repeatToggleButton1.setText("Repeat Infinitely");
 
         imageFilesTextArea1.setEditable(false);
 
@@ -156,7 +163,7 @@ public class SettingsPanel extends JPanel {
 
         displayTimeLabel1.setText("Image display time in milliseconds");
 
-        repeatToggleButton2.setText("Repeat Infinitly");
+        repeatToggleButton2.setText("Repeat Infinitely");
 
         startSlideshowButton1.setText("Start");
         startSlideshowButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -242,6 +249,12 @@ public class SettingsPanel extends JPanel {
 
     private void startSlideshowButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                                      
         // TODO add your handling code here:
+        if (hasChosenFilesAndFolder) {
+            imageManagement.setTimeDisplayMS(timeDisplayMS);
+            imageManagement.setImageFiles(imageFilesFromChosenDirectory);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a folder with images or subfolder containing images.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
+        }
     }   
 
 }
