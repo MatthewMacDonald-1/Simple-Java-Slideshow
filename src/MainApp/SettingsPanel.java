@@ -24,8 +24,8 @@ public class SettingsPanel extends JPanel {
         initComponents();
     }
 
-    private javax.swing.JButton chooseImageDirectoyButton;
-    private javax.swing.JButton chooseImageDirectoyButton1;
+    private javax.swing.JButton chooseImageDirectoryButton;
+    private javax.swing.JButton chooseImageDirectoryButton1;
     private java.awt.Label displayTimeLabel;
     private java.awt.Label displayTimeLabel1;
     private javax.swing.JSpinner displayTimeSpinner;
@@ -53,7 +53,7 @@ public class SettingsPanel extends JPanel {
 
         jFrame1 = new javax.swing.JFrame();
         settingsHeaderLabel = new javax.swing.JLabel();
-        chooseImageDirectoyButton = new javax.swing.JButton();
+        chooseImageDirectoryButton = new javax.swing.JButton();
         displayTimeSpinner = new javax.swing.JSpinner();
         displayTimeLabel = new java.awt.Label();
         imageFilesTextArea = new java.awt.TextArea();
@@ -62,7 +62,7 @@ public class SettingsPanel extends JPanel {
         repeatToggleButton1 = new javax.swing.JToggleButton();
         imageFilesTextArea1 = new java.awt.TextArea();
         settingsHeaderLabel1 = new javax.swing.JLabel();
-        chooseImageDirectoyButton1 = new javax.swing.JButton();
+        chooseImageDirectoryButton1 = new javax.swing.JButton();
         displayTimeLabel1 = new java.awt.Label();
         displayTimeSpinner1 = new javax.swing.JSpinner();
         repeatToggleButton2 = new javax.swing.JToggleButton();
@@ -75,8 +75,8 @@ public class SettingsPanel extends JPanel {
         settingsHeaderLabel.setText("Settings");
         settingsHeaderLabel.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        chooseImageDirectoyButton.setText("Choose image directory");
-        chooseImageDirectoyButton.addActionListener(new java.awt.event.ActionListener() {
+        chooseImageDirectoryButton.setText("Choose image directory");
+        chooseImageDirectoryButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseImageDirectoyButtonActionPerformed(evt);
             }
@@ -110,7 +110,7 @@ public class SettingsPanel extends JPanel {
                         .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(imageFilesTextArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(chooseImageDirectoyButton)
+                                .addComponent(chooseImageDirectoryButton)
                                 .addGroup(jFrame1Layout.createSequentialGroup()
                                     .addComponent(displayTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -125,7 +125,7 @@ public class SettingsPanel extends JPanel {
                 .addContainerGap()
                 .addComponent(settingsHeaderLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(chooseImageDirectoyButton)
+                .addComponent(chooseImageDirectoryButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(displayTimeSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -147,8 +147,8 @@ public class SettingsPanel extends JPanel {
         settingsHeaderLabel1.setText("Settings");
         settingsHeaderLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        chooseImageDirectoyButton1.setText("Choose image directory");
-        chooseImageDirectoyButton1.addActionListener(new java.awt.event.ActionListener() {
+        chooseImageDirectoryButton1.setText("Choose image directory");
+        chooseImageDirectoryButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 chooseImageDirectoyButton1ActionPerformed(evt);
             }
@@ -181,7 +181,7 @@ public class SettingsPanel extends JPanel {
                         .addComponent(startSlideshowButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chooseImageDirectoyButton1)
+                            .addComponent(chooseImageDirectoryButton1)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(displayTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -198,7 +198,7 @@ public class SettingsPanel extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(chooseImageDirectoyButton1)
+                        .addComponent(chooseImageDirectoryButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(displayTimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(displayTimeSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
