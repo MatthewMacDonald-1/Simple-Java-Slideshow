@@ -14,7 +14,16 @@
 hs_err_pid*
 replay_pid*
 
-
 # VS code java project
 bin/
 .vscode/
+
+# ignore all jar packages except those in lib
+*.jar
+!lib/**/*.jar
+
+# macOS Files
+.DS_Store
+
+# Windows Files
+Thumbs.db
