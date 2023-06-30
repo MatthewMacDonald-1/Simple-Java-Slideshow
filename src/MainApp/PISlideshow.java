@@ -61,6 +61,8 @@ public class PISlideshow {
         mainFrame.remove(imagePanel);
         mainFrame.add(settingsPanel, BorderLayout.CENTER);
 
+        PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
+
         mainFrame.pack();
         mainFrame.setVisible(true);
     }
@@ -68,6 +70,8 @@ public class PISlideshow {
     protected static void switchToImagePanel() {
         mainFrame.remove(settingsPanel);
         mainFrame.add(imagePanel);
+
+        PISlideshow.setWindowName("Rasp PI Slideshow");
 
         mainFrame.pack();
         mainFrame.setVisible(true);

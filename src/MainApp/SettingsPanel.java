@@ -28,8 +28,6 @@ public class SettingsPanel extends JPanel {
     public SettingsPanel(ImageManagement imageManagement) {
         this.imageManagement = imageManagement;
 
-        PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
-
         initComponents();
     }
 
