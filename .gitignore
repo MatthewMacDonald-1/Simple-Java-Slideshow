@@ -21,6 +21,7 @@ bin/
 # ignore all jar packages except those in lib
 *.jar
 !lib/**/*.jar
+!build/**/*.jar
 
 # macOS Files
 .DS_Store
