@@ -90,8 +90,8 @@ public class SimpleSlideshow {
 
 
         if (isFirstTime) {
-            //imageManagement = customCacheSize != -1 ? new ImageManagement(customCacheSize) : new ImageManagement();
-            imageManagement = new ImageManagement();
+            imageManagement = customCacheSize != -1 ? new ImageManagement(customCacheSize) : new ImageManagement();
+            //imageManagement = new ImageManagement();
             settingsPanel = new SettingsPanel(imageManagement);
 
             imagePanel = new ImagePanel(imageManagement);
@@ -162,7 +162,7 @@ public class SimpleSlideshow {
         if (args.length >= 1) {
             try {
                 customCacheSize = Integer.parseInt(args[0]);
-                System.out.println("Custom cache size set to: " + customCacheSize);
+                if (customCacheSize != -1) System.out.println("Custom cache size set to: " + customCacheSize);
             } catch (NumberFormatException e) {
                 // continue without custom cache size
                 System.out.println("Invalid custom cache size. Continuing using defaults.");
