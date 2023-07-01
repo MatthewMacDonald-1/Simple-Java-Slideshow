@@ -28,6 +28,8 @@ public class SettingsPanel extends JPanel {
     public SettingsPanel(ImageManagement imageManagement) {
         this.imageManagement = imageManagement;
 
+        PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
+
         initComponents();
     }
 
@@ -36,7 +38,7 @@ public class SettingsPanel extends JPanel {
     private java.awt.Label displayTimeLabel;
     private java.awt.Label displayTimeLabel1;
     private javax.swing.JSpinner displayTimeSpinner;
-    private SpinnerNumberModel displayTimeSpinner1Model = new SpinnerNumberModel(2000, 500, 10000, 100);
+    private SpinnerNumberModel displayTimeSpinner1Model = new SpinnerNumberModel(2000, 1000, 10000, 500);
     private javax.swing.JSpinner displayTimeSpinner1;
     private java.awt.TextArea imageFilesTextArea;
     private java.awt.TextArea imageFilesTextArea1;
@@ -321,7 +323,7 @@ public class SettingsPanel extends JPanel {
                 imageManagement.startSlideshow();
                 PISlideshow.switchToImagePanel();
             } else {
-                JOptionPane.showMessageDialog(null, "Please input a valid range for Image Display time. Accepted range is 500 to 10,000 milliseconds.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Please input a valid range for Image Display time. Accepted range is 1,000 to 10,000 milliseconds.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
             }            
         } else {
             JOptionPane.showMessageDialog(null, "Please select a folder with images or subfolder containing images.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);

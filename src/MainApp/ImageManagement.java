@@ -49,6 +49,9 @@ public class ImageManagement {
     }
 
     public boolean hasImage() {
+        if (currentActiveImageIndex == -1 || currentActiveImageIndex == -1) {
+            return false;
+        }
         if (cachedImages != null) {
             if (currentCachedImageIndex < cachedImages.length || currentCachedImageIndex >= 0) {
                 if (cachedImages[currentCachedImageIndex] != null) {
@@ -115,16 +118,31 @@ public class ImageManagement {
     }
 
 
+    Timer slideshowTimer = null;
 
     public void startSlideshow() {
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
+        if (imageFiles == null) return;
+        
+        slideshowTimer = new Timer();
+        slideshowTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 goToNextImage();
                 PISlideshow.imagePanel.repaint();
             }
         }, 0, timeDisplayMS);
+    }
+
+    public void restartSlideshow() {
+        if (imageFiles == null) return;
+
+        prepFromStart();
+        startSlideshow();
+    }
+
+    public void stopSlideshow() {
+        if (slideshowTimer == null) return;
+        slideshowTimer.cancel();
     }
 
 }
