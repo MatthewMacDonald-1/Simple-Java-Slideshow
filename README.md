@@ -1,5 +1,11 @@
 # Simple Java Slideshow
 
+## License
+
+[See license](LICENSE.md)
+
+This project is licensed under the [GNU General Public License v3.0](https://www.gnu.org/licenses/).
+
 ## Release
 
 [Latest release](https://github.com/MatthewMacDonald-1/Simple-Java-Slideshow/releases/tag/Release)
