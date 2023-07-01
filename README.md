@@ -14,7 +14,7 @@ This project is licensed under the [GNU General Public License v3.0](https://www
 
 Note: this project was built using the Java Version 11 JDK.
 
-1. Download the [latest release]([build/Simple-Java-Slideshow.jar](https://github.com/MatthewMacDonald-1/Simple-Java-Slideshow/releases/tag/Release)
+1. Download the [latest release](https://github.com/MatthewMacDonald-1/Simple-Java-Slideshow/releases/tag/Release)
 2. Run via the command line using `java -jar Simple-Java-Slideshow.jar [args]` when in the same folder.
     - Optional arg is the number of images stored in the memory. Default is 3 the minimum is 2. i.e. `java -jar Simple-Java-Slideshow.jar 2`.
 3. Once you have run the jar you will be asked to select a folder in which the program will search for images within (it will also search sub folders). You will also be able to set the time that image is displayed for, the default is 2,000 milliseconds (min 1,000 and max 10,000).
