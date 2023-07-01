@@ -36,7 +36,7 @@ public class PISlideshow {
     private static boolean isFirstTime = true;
 
     protected static void createAndShowGUI(boolean setUndecorated) throws IOException {
-        mainFrame = new JFrame("Rasp PI Slideshow");
+        mainFrame = new JFrame("Simple Java Slideshow");
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setMinimumSize(DEFAULT_MIN_WINDOW_SIZE);
 
@@ -101,7 +101,7 @@ public class PISlideshow {
     protected static void switchToSettingsPanel() {
         currentPanel = settingsPanel;
 
-        PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
+        PISlideshow.setWindowName("Simple Java Slideshow - Settings");
 
 
         try {
@@ -122,7 +122,7 @@ public class PISlideshow {
         mainFrame.remove(settingsPanel);
         mainFrame.add(imagePanel);
 
-        PISlideshow.setWindowName("Rasp PI Slideshow");
+        PISlideshow.setWindowName("Simple Java Slideshow");
 
         mainFrame.pack();
         mainFrame.setVisible(true);
