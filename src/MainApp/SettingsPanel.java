@@ -28,7 +28,7 @@ public class SettingsPanel extends JPanel {
     public SettingsPanel(ImageManagement imageManagement) {
         this.imageManagement = imageManagement;
 
-        PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
+        SimpleSlideshow.setWindowName("Rasp PI Slideshow - Settings");
 
         initComponents();
     }
@@ -321,7 +321,7 @@ public class SettingsPanel extends JPanel {
                 imageManagement.setTimeDisplayMS(timeDisplayMS);
                 if (!imageManagement.setImageFiles(imageFilesFromChosenDirectory)) JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
                 imageManagement.startSlideshow();
-                PISlideshow.switchToImagePanel();
+                SimpleSlideshow.switchToImagePanel();
             } else {
                 JOptionPane.showMessageDialog(null, "Please input a valid range for Image Display time. Accepted range is 1,000 to 10,000 milliseconds.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
             }            

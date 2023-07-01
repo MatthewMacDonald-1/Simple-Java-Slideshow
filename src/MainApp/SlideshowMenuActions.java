@@ -36,8 +36,8 @@ public class SlideshowMenuActions extends MenuAction
         
         @Override
         public void actionPerformed(ActionEvent e) {
-            PISlideshow.imageManagement.stopSlideshow();
-            PISlideshow.switchToSettingsPanel();
+            SimpleSlideshow.imageManagement.stopSlideshow();
+            SimpleSlideshow.switchToSettingsPanel();
         }
     }
 
@@ -49,8 +49,8 @@ public class SlideshowMenuActions extends MenuAction
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            PISlideshow.imageManagement.stopSlideshow();
-            PISlideshow.imageManagement.restartSlideshow();
+            SimpleSlideshow.imageManagement.stopSlideshow();
+            SimpleSlideshow.imageManagement.restartSlideshow();
         }
     }
 
@@ -62,7 +62,7 @@ public class SlideshowMenuActions extends MenuAction
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            PISlideshow.imageManagement.stopSlideshow();
+            SimpleSlideshow.imageManagement.stopSlideshow();
         }
     }
 
@@ -75,7 +75,7 @@ public class SlideshowMenuActions extends MenuAction
         @Override
         public void actionPerformed(ActionEvent e) {
             // PISlideshow.imageManagement
-            PISlideshow.imageManagement.startSlideshow();
+            SimpleSlideshow.imageManagement.startSlideshow();
         }
     }
     

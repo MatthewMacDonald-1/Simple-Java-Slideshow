@@ -47,7 +47,7 @@ public class WindowMenuActions extends MenuAction {
         if (applied == ScreenState.borderLess && current != ScreenState.borderLess) {
             frame.dispose();
             try {
-                PISlideshow.createAndShowGUI(true);
+                SimpleSlideshow.createAndShowGUI(true);
             } catch (IOException e) {
                 // DO nothing
             }
@@ -58,7 +58,7 @@ public class WindowMenuActions extends MenuAction {
         if (applied == ScreenState.windowed && current != ScreenState.windowed) {
             frame.dispose();
             try {
-                PISlideshow.createAndShowGUI(false);
+                SimpleSlideshow.createAndShowGUI(false);
             } catch (IOException e) {
                 // DO nothing
             }
@@ -79,7 +79,7 @@ public class WindowMenuActions extends MenuAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                changeWindow(WindowMenuActions.ScreenState.fullScreen, PISlideshow.mainFrame);
+                changeWindow(WindowMenuActions.ScreenState.fullScreen, SimpleSlideshow.mainFrame);
             } catch (IOException ex) {
                 // Do nothing
             }
@@ -102,7 +102,7 @@ public class WindowMenuActions extends MenuAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                changeWindow(WindowMenuActions.ScreenState.windowed, PISlideshow.mainFrame);
+                changeWindow(WindowMenuActions.ScreenState.windowed, SimpleSlideshow.mainFrame);
             } catch (IOException ex) {
                 // Do nothing
             }
@@ -118,7 +118,7 @@ public class WindowMenuActions extends MenuAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                changeWindow(WindowMenuActions.ScreenState.borderLess, PISlideshow.mainFrame);
+                changeWindow(WindowMenuActions.ScreenState.borderLess, SimpleSlideshow.mainFrame);
             } catch (IOException ex) {
                 // Do nothing
             }

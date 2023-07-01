@@ -16,7 +16,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-public class PISlideshow {
+public class SimpleSlideshow {
 
     // From args
     /** Is unset if equal to -1 */
@@ -101,7 +101,7 @@ public class PISlideshow {
     protected static void switchToSettingsPanel() {
         currentPanel = settingsPanel;
 
-        PISlideshow.setWindowName("Simple Java Slideshow - Settings");
+        SimpleSlideshow.setWindowName("Simple Java Slideshow - Settings");
 
 
         try {
@@ -122,7 +122,7 @@ public class PISlideshow {
         mainFrame.remove(settingsPanel);
         mainFrame.add(imagePanel);
 
-        PISlideshow.setWindowName("Simple Java Slideshow");
+        SimpleSlideshow.setWindowName("Simple Java Slideshow");
 
         mainFrame.pack();
         mainFrame.setVisible(true);

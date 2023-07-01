@@ -128,7 +128,7 @@ public class ImageManagement {
             @Override
             public void run() {
                 goToNextImage();
-                PISlideshow.imagePanel.repaint();
+                SimpleSlideshow.imagePanel.repaint();
             }
         }, 0, timeDisplayMS);
     }
