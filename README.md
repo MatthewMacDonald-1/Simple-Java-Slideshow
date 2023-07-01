@@ -1,5 +1,9 @@
 # Simple Java Slideshow
 
+## Release
+
+[Latest release](https://github.com/MatthewMacDonald-1/Simple-Java-Slideshow/releases/tag/Release)
+
 ## Instructions
 
 1. Download the [jar file](build/Simple-Java-Slideshow%20(java%20ver%2011).jar) in the build folder
