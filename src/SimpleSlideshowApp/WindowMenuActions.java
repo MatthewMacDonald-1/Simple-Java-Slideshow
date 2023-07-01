@@ -1,3 +1,19 @@
+// Simple Java Slideshow - A simple java GUI app designed to display a collection of images like a slideshow.
+// Copyright (C) 2023  Matthew MacDonald
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 package SimpleSlideshowApp;
 
 import java.awt.Frame;
@@ -51,7 +67,6 @@ public class WindowMenuActions extends MenuAction {
             } catch (IOException e) {
                 // DO nothing
             }
-            //frame.setUndecorated(true);
             frame.setExtendedState(Frame.MAXIMIZED_BOTH);
             current =  ScreenState.borderLess;
         }
@@ -63,8 +78,6 @@ public class WindowMenuActions extends MenuAction {
                 // DO nothing
             }
             
-            //frame.setUndecorated(false);
-            // you can choose to make the screen fit or not
             frame.setExtendedState(Frame.MAXIMIZED_BOTH);
             current =  ScreenState.windowed;
         }
@@ -83,12 +96,6 @@ public class WindowMenuActions extends MenuAction {
             } catch (IOException ex) {
                 // Do nothing
             }
-            // JFrame frame = PISlideshow.mainFrame;
-            // JWindow fullScreenWindow = new JWindow(frame);
-            // fullScreenWindow.add(PISlideshow.currentPanel);
-            // frame.setSize(0,0);
-            // fullScreenWindow.setSize(Toolkit.getDefaultToolkit().getScreenSize());
-            // fullScreenWindow.setVisible(true);
         }
 
     }

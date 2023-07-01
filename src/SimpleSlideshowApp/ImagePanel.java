@@ -1,3 +1,19 @@
+// Simple Java Slideshow - A simple java GUI app designed to display a collection of images like a slideshow.
+// Copyright (C) 2023  Matthew MacDonald
+// 
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 package SimpleSlideshowApp;
 
 import java.awt.Color;
@@ -59,20 +75,18 @@ public class ImagePanel extends JPanel {
         } else {
             scaleH = (double)windowSize.getHeight() / (double)largestSide;
         }
-        //System.out.println(PISlideshow.frameSize().width);
 
         double scaleChosen = widthIsGreater ? scaleW : scaleH;
         boolean imageWider = (int)((double)toDraw.getWidth() * scaleChosen) > windowSize.getWidth();
         boolean imageTaller = (int)((double)toDraw.getHeight() * scaleChosen) > windowSize.getHeight();
 
-        ///g2.scale(scale, scale);
         int yOffset = 0;
         int xOffset = 0;
         if (widthIsGreater) {
             
             if (imageTaller) {
                 double modScale = scaleChosen * ((double)windowSize.getHeight() / ((double)toDraw.getHeight() * scaleChosen));
-                // System.out.println("Taller: " + scaleChosen + " -> " + modScale); // confirmed works
+
                 g2.scale(modScale, modScale);
                 xOffset = (int)((double)((int)windowSize.getWidth() - (int)((double)toDraw.getWidth() * modScale)) * 1f/modScale) / 2;
             } else {
@@ -82,7 +96,7 @@ public class ImagePanel extends JPanel {
         } else {
             if (imageWider) {
                 double modScale = scaleChosen * ((double)windowSize.getWidth() / ((double)toDraw.getWidth() * scaleChosen));
-                // System.out.println("Wider: " + scaleChosen + " -> " + modScale); // confirmed works
+
                 g2.scale(modScale, modScale);
                 yOffset = (int)((double)((int)windowSize.getHeight() - (int)((double)toDraw.getHeight() * modScale)) * 1f/modScale) / 2;
             } else {
