@@ -1,4 +1,4 @@
-package MainApp;
+package SimpleSlideshowApp;
 
 import java.awt.Frame;
 import java.awt.GraphicsDevice;

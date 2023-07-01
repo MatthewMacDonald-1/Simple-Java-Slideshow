@@ -1,4 +1,4 @@
-package MainApp;
+package SimpleSlideshowApp;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;

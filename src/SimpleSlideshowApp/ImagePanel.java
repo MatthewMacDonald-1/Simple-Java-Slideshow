@@ -1,4 +1,4 @@
-package MainApp;
+package SimpleSlideshowApp;
 
 import java.awt.Color;
 import java.awt.Cursor;

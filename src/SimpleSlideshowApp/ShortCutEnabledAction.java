@@ -1,6 +1,4 @@
-package MainApp;
-
-import java.awt.event.ActionEvent;
+package SimpleSlideshowApp;
 
 import javax.swing.AbstractAction;
 import javax.swing.KeyStroke;
