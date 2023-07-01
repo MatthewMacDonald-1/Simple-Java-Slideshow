@@ -1,9 +1,12 @@
 package MainApp;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -20,6 +23,10 @@ public class ImagePanel extends JPanel {
         image = imageManagement;
 
         setBackground(Color.BLACK); // sets frame background to black
+
+        BufferedImage curseImg = new BufferedImage(12, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(curseImg, new Point(0, 0), "blank cursor");
+        setCursor(blankCursor);
     }
 
     /**
