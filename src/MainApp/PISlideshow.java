@@ -103,8 +103,14 @@ public class PISlideshow {
 
         PISlideshow.setWindowName("Rasp PI Slideshow - Settings");
 
+
         try {
-            WindowMenuActions.changeWindow(WindowMenuActions.ScreenState.windowed, mainFrame);
+            if (WindowMenuActions.current != WindowMenuActions.ScreenState.windowed) {
+                WindowMenuActions.changeWindow(WindowMenuActions.ScreenState.windowed, mainFrame);
+            } else {
+                mainFrame.dispose();
+                createAndShowGUI(false);
+            }
         } catch (IOException e) {
             // Do nothing
         }
