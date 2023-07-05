@@ -46,7 +46,7 @@ public class ImageManagement {
      * <p>The default number of images for the program to keep in memory.</p>
      * <p>Prev, current, next</p>
      */
-    private static final int DEFAULT_NUM_IMAGES = 3;
+    public static final int DEFAULT_NUM_IMAGES = 2;
     private final int maxCacheSize;
 
     /**

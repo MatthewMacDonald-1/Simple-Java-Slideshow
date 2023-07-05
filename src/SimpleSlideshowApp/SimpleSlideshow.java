@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import java.util.Arrays;
 
 import javax.swing.WindowConstants;
 
@@ -31,12 +32,14 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class SimpleSlideshow {
 
     // From args
     /** Is unset if equal to -1 */
     private static int customCacheSize = -1;
+    private static boolean useNoUI = false;
 
     static protected JFrame mainFrame = null;
     
@@ -151,24 +154,82 @@ public class SimpleSlideshow {
         
     }
 
+    /**
+     * Returns the current pixel dimensions of the application window.
+     * @return
+     */
     protected static Dimension frameSize() {
         return mainFrame.getSize();
     }
 
+
+    /**
+     * Returns the index of the candidate string if it exists in the array otherwise -1.
+     * @param candidate
+     * @param arr
+     * @return
+     */
+    private static int stringArrIncludes(String candidate, String[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (candidate.equals(arr[i])) return i;
+        }
+        return -1;
+    }
+
+    /**
+     * Analyze and parse the args array passed to the main static function and set variables.
+     * @param args Main function args string array
+     */
+    private static void argScanner(String[] args) {
+        if (args.length >= 1) {
+            final String[] flags = { "cache", "no_ui" };
+            int[] seenTimes = new int[flags.length];
+
+            for (int i = 0; i < args.length; i++) {
+                int index = stringArrIncludes(args[i], args);
+                if (index != -1) {
+                    if (seenTimes[index] == 0) {
+
+                        if (args[i].equals(flags[0])) {
+                            if (i + 1 < args.length) {
+                                // if index exists try to parse int
+                                try {
+                                    customCacheSize = Integer.parseInt(args[0]);
+                                    if (customCacheSize != -1) System.out.println("Custom cache size set to: " + customCacheSize);
+                                } catch (NumberFormatException e) {
+                                    // continue without custom cache size
+                                    System.out.println("Invalid custom cache size. Continuing using defaults {" + ImageManagement.DEFAULT_NUM_IMAGES + "}.");
+                                }
+                            }
+                        }
+                        else if (args[i].equals(flags[1])) {
+                            useNoUI = true; // configure settings
+                        }
+
+                        seenTimes[index]++;
+                    } else {
+                        System.out.println("Flag '" + args[i] + "' at index '" + i + "' ignored.");
+                    }
+                }
+            }
+        }
+    }
     
 
     public static void main(String[] args) throws Exception {
 
-        if (args.length >= 1) {
-            try {
-                customCacheSize = Integer.parseInt(args[0]);
-                if (customCacheSize != -1) System.out.println("Custom cache size set to: " + customCacheSize);
-            } catch (NumberFormatException e) {
-                // continue without custom cache size
-                System.out.println("Invalid custom cache size. Continuing using defaults.");
-            }
+        argScanner(args);
+
+        // if (args.length >= 1) {
+        //     try {
+        //         customCacheSize = Integer.parseInt(args[0]);
+        //         if (customCacheSize != -1) System.out.println("Custom cache size set to: " + customCacheSize);
+        //     } catch (NumberFormatException e) {
+        //         // continue without custom cache size
+        //         System.out.println("Invalid custom cache size. Continuing using defaults.");
+        //     }
             
-        }
+        // }
         
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {

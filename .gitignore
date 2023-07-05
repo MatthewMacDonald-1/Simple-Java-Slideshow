@@ -23,6 +23,8 @@ bin/
 !lib/**/*.jar
 !build/**/*.jar
 
+*.zip
+
 # macOS Files
 .DS_Store
 
