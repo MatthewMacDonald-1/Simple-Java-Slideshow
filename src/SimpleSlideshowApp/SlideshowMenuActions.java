@@ -25,8 +25,8 @@ import javax.swing.Action;
 
 public class SlideshowMenuActions extends MenuAction 
 {
-    public SlideshowMenuActions() {
-        actions.add(new GoToSettingsSlideshowMenuAction("Settings", "Go to slideshow settings", null, null));
+    public SlideshowMenuActions(boolean useNoUI) {
+        if (!useNoUI) actions.add(new GoToSettingsSlideshowMenuAction("Settings", "Go to slideshow settings", null, null));
         actions.add(new ResumeSlideShowMenuAction("Resume", "Resume slideshow from beginning", null, null));
         actions.add(new PauseSlideshowMenuAction("Pause", "Pause slideshow from beginning", null, null));
         actions.add(new RestartSlideshowMenuAction("Restart", "Restart slideshow from beginning", null, null));

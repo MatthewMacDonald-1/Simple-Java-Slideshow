@@ -34,6 +34,11 @@ public class ImagePanel extends JPanel {
     private ImageManagement image;
     private BufferedImage noImage;
 
+    /**
+     * 
+     * @param imageManagement
+     * @throws IOException Throws <code>IOException</code> if the constructor can't find the no-image.png file.
+     */
     public ImagePanel(ImageManagement imageManagement) throws IOException {
         noImage = ImageIO.read(ImagePanel.class.getClassLoader().getResource("no-image.png"));
         image = imageManagement;

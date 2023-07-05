@@ -316,16 +316,42 @@ public class SettingsPanel extends JPanel {
         
         if (hasChosenFilesAndFolder) {
             if (timeDisplayMS >= 500 && timeDisplayMS <= 10000) {
-                imageManagement.setTimeDisplayMS(timeDisplayMS);
-                if (!imageManagement.setImageFiles(imageFilesFromChosenDirectory)) JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
-                imageManagement.startSlideshow();
-                SimpleSlideshow.switchToImagePanel();
+                // Do nothing
             } else {
-                JOptionPane.showMessageDialog(null, "Please input a valid range for Image Display time. Accepted range is 1,000 to 10,000 milliseconds.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
-            }            
+                if (timeDisplayMS < 0) {
+                    JOptionPane.showMessageDialog(null, "Time delay must be positive.", "ERROR", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Warning. The Normal image time delay is between is 1,000 to 10,000 milliseconds, you put " + timeDisplayMS + ".", "Warning", JOptionPane.WARNING_MESSAGE);
+                }
+            }
+            imageManagement.setTimeDisplayMS(timeDisplayMS);
+            if (!imageManagement.setImageFiles(imageFilesFromChosenDirectory)) JOptionPane.showMessageDialog(null, "ERROR", "ERROR", JOptionPane.ERROR_MESSAGE);
+            imageManagement.startSlideshow();
+            SimpleSlideshow.switchToImagePanel();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a folder with images or subfolder containing images.", "User Input ERROR", JOptionPane.ERROR_MESSAGE);
         }
-    }   
+    }
+
+    protected void startWithNoUI(File baseDirectory, int timeDisplayMS) {
+        File[] filesInFolder = baseDirectory.listFiles();
+
+        ArrayList<File> foundImages = new ArrayList<File>();
+
+        findImageFiles(filesInFolder, 0, foundImages);
+
+        File[] imageFiles = new File[foundImages.size()];
+        for (int i = 0; i < imageFiles.length; i++) {
+            imageFiles[i] = foundImages.get(i);
+        }
+
+        // Then set variables for passing on start if there is at least on image present
+        imageFilesFromChosenDirectory = imageFiles;
+        hasChosenFilesAndFolder = true;
+        this.timeDisplayMS = timeDisplayMS;
+
+        // Start
+        startSlideshowButton1ActionPerformed(null);
+    }
 
 }

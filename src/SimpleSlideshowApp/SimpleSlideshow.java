@@ -19,9 +19,6 @@ package SimpleSlideshowApp;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
-
-import java.util.Arrays;
-
 import javax.swing.WindowConstants;
 
 import java.awt.AWTException;
@@ -31,8 +28,9 @@ import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.net.URI;
 
 public class SimpleSlideshow {
 
@@ -40,6 +38,7 @@ public class SimpleSlideshow {
     /** Is unset if equal to -1 */
     private static int customCacheSize = -1;
     private static boolean useNoUI = false;
+    private static int timeDelayOverride = 2000;
 
     static protected JFrame mainFrame = null;
     
@@ -54,6 +53,13 @@ public class SimpleSlideshow {
 
     private static boolean isFirstTime = true;
 
+    /**
+     * <p></p>
+     *    
+     * <p>Note: if you aren't calling this function for the first time you should dispose the <code>JFrame</code> <code>mainFrame</code> before calling this function.</p>
+     * @param setUndecorated Set <code>true</code> if using full screen otherwise <code>false</code>
+     * @throws IOException Throws an <code>IOException</code> if the class constructors can't find expected packaged images.
+     */
     protected static void createAndShowGUI(boolean setUndecorated) throws IOException {
         mainFrame = new JFrame("Simple Java Slideshow");
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -69,7 +75,7 @@ public class SimpleSlideshow {
         WindowMenuActions windowActions = new WindowMenuActions();
         menuBar.add(windowActions.createMenu());
 
-        SlideshowMenuActions slideshowMenuActions = new SlideshowMenuActions();
+        SlideshowMenuActions slideshowMenuActions = new SlideshowMenuActions(useNoUI);
         menuBar.add(slideshowMenuActions.createMenu());
 
         menuBar.setVisible(false);
@@ -91,19 +97,23 @@ public class SimpleSlideshow {
             }
         });
 
-
+        // Contains configuration variables for the program.
         if (isFirstTime) {
             imageManagement = customCacheSize != -1 ? new ImageManagement(customCacheSize) : new ImageManagement();
-            //imageManagement = new ImageManagement();
+
             settingsPanel = new SettingsPanel(imageManagement);
 
             imagePanel = new ImagePanel(imageManagement);
 
-            currentPanel = settingsPanel;
+            if (useNoUI) {
+                currentPanel = imagePanel;
+            } else {
+                currentPanel = settingsPanel;
+            }            
 
             isFirstTime = false;
         }
-        
+        // Configuration end
 
         // Set default panel
         mainFrame.add(currentPanel, BorderLayout.CENTER);
@@ -113,6 +123,10 @@ public class SimpleSlideshow {
         mainFrame.setVisible(true);
     }
 
+    /**
+     * Change the window name.
+     * @param newWindowName New window name to set.
+     */
     protected static void setWindowName(String newWindowName) {
         mainFrame.setTitle(newWindowName);
     }
@@ -182,7 +196,7 @@ public class SimpleSlideshow {
      */
     private static void argScanner(String[] args) {
         if (args.length >= 1) {
-            final String[] flags = { "cache", "no_ui" };
+            final String[] flags = { "cache", "no_ui", "time_delay" };
             int[] seenTimes = new int[flags.length];
 
             for (int i = 0; i < args.length; i++) {
@@ -194,16 +208,28 @@ public class SimpleSlideshow {
                             if (i + 1 < args.length) {
                                 // if index exists try to parse int
                                 try {
-                                    customCacheSize = Integer.parseInt(args[0]);
+                                    customCacheSize = Integer.parseInt(args[i + 1]);
                                     if (customCacheSize != -1) System.out.println("Custom cache size set to: " + customCacheSize);
                                 } catch (NumberFormatException e) {
                                     // continue without custom cache size
-                                    System.out.println("Invalid custom cache size. Continuing using defaults {" + ImageManagement.DEFAULT_NUM_IMAGES + "}.");
+                                    System.out.println("Invalid custom cache size: " + args[i + 1] + ". Continuing using default: " + ImageManagement.DEFAULT_NUM_IMAGES + ".");
                                 }
                             }
                         }
                         else if (args[i].equals(flags[1])) {
                             useNoUI = true; // configure settings
+                        }
+                        else if (args[i].equals(flags[2])) {
+                            if (i + 1 < args.length) {
+                                // if index exists try to parse int
+                                try {
+                                    timeDelayOverride = Integer.parseInt(args[i + 1]);
+                                    if (timeDelayOverride != -1) System.out.println("Image time delay override size set to: " + timeDelayOverride + " ms");
+                                } catch (NumberFormatException e) {
+                                    // continue without custom cache size
+                                    System.out.println("Invalid time delay: " + args[i + 1] + ". Continuing using defaults: " + 2000 + " ms.");
+                                }
+                            }
                         }
 
                         seenTimes[index]++;
@@ -220,23 +246,29 @@ public class SimpleSlideshow {
 
         argScanner(args);
 
-        // if (args.length >= 1) {
-        //     try {
-        //         customCacheSize = Integer.parseInt(args[0]);
-        //         if (customCacheSize != -1) System.out.println("Custom cache size set to: " + customCacheSize);
-        //     } catch (NumberFormatException e) {
-        //         // continue without custom cache size
-        //         System.out.println("Invalid custom cache size. Continuing using defaults.");
-        //     }
-            
-        // }
         
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
                     // Create Start GUI                    
                     createAndShowGUI(false);
-                    switchToSettingsPanel();
+                    if (useNoUI) {
+                                         
+                        URI URIpath = SimpleSlideshow.class.getProtectionDomain().getCodeSource().getLocation().toURI();
+                        File directory = new File(URIpath).getParentFile();
+
+                        System.out.println(directory.getAbsolutePath() + " " + directory.isDirectory());
+                        settingsPanel.startWithNoUI(directory, timeDelayOverride);
+                        // switchToImagePanel();     
+                        // try {
+                        //     WindowMenuActions.changeWindow(WindowMenuActions.ScreenState.fullScreen, mainFrame);
+                        // } catch (IOException e) {
+                        //     // Do nothing
+                        // }
+                    } else {
+                        switchToSettingsPanel();
+                    }
+                    
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     System.exit(1);
